@@ -50,7 +50,7 @@ public class AuthController {
                                @RequestParam String password,
                                @RequestParam String confirmPassword) {
         if (password.equals(confirmPassword)) {
-            userService.createUser(username, userId, password);
+            userService.register(username, userId, password);
             return "redirect:/login";
         }
         return "redirect:/signup?error";
