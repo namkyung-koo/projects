@@ -24,11 +24,7 @@ public class User {
     private String password;
     private Long balance;
 
-    public User(String username, String userId, String password) {
-        this.username = username;
-        this.userId = userId;
-        this.password = password;
-    }
+    public User() {}
 
     public void deposit(Long amount) {
         this.balance += amount;
