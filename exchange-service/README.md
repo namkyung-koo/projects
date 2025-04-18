@@ -12,3 +12,6 @@
 - 스프링 프레임워크 활용
 - HTTP API로 데이터 주고 받기
 - 외부 API 활용
+
+# 다이어그램
+![Exchange Service 구조](docs/images/diagram.png)
