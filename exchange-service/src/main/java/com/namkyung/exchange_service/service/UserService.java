@@ -18,21 +18,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final ExchangeTransactionRepository transactionRepository;
 
-    public User createUser(String userName, Long balance) {
-        User user =  new User(userName, balance);
+    public User createUser(String username, String userId, String password) {
+        User user =  new User(username, userId, password);
         return userRepository.save(user);
     }
 
-    public User deposit(Integer userId, Long amount) {
-        User user = userRepository.findById(userId)
+    public User deposit(Integer id, Long amount) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.deposit(amount);
 
         return userRepository.save(user);
     }
 
-    public User exchange(Integer userId, TransactionType currencyType, Double rate, Long amount) {
-        User user = userRepository.findById(userId)
+    public User exchange(Integer id, TransactionType currencyType, Double rate, Long amount) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         user.withdraw(amount);

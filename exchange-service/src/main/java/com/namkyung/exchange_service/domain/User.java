@@ -15,17 +15,19 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User {
+
     @Id
     @GeneratedValue
-    private Integer userId;
-    private String userName;
-    private Long balance; // 원화를 기준으로 한 잔액(단위: 원)
+    private Integer id;
+    private String username;
+    private String userId;
+    private String password;
+    private Long balance;
 
-
-    public User(String userName, Long balance) {
-        if (balance < 0) throw new IllegalStateException("초기 잔액은 0 이상이어야 합니다.");
-        this.userName = userName;
-        this.balance = balance;
+    public User(String username, String userId, String password) {
+        this.username = username;
+        this.userId = userId;
+        this.password = password;
     }
 
     public void deposit(Long amount) {
@@ -33,7 +35,9 @@ public class User {
     }
 
     public void withdraw(Long amount) {
-        if (this.balance < amount) throw new IllegalStateException("잔액 부족");
+        if (this.balance < amount) {
+            throw new IllegalArgumentException("잔액이 부족합니다.");
+        }
         this.balance -= amount;
     }
 }
