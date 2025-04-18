@@ -3,23 +3,33 @@ package com.namkyung.exchange_service.service;
 import com.namkyung.exchange_service.domain.ExchangeTransaction;
 import com.namkyung.exchange_service.domain.TransactionType;
 import com.namkyung.exchange_service.domain.User;
+import com.namkyung.exchange_service.exception.DuplicateUserIdException;
 import com.namkyung.exchange_service.repository.ExchangeTransactionRepository;
 import com.namkyung.exchange_service.repository.UserRepository;
 import java.time.LocalDateTime;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Getter
+@Setter
 public class UserService {
 
     private final UserRepository userRepository;
     private final ExchangeTransactionRepository transactionRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public User createUser(String username, String userId, String password) {
-        User user =  new User(username, userId, password);
+    public User register(String userId, String password, String username) {
+        if (userRepository.findByUserId(userId).isPresent()) {
+            throw new DuplicateUserIdException("이미 존재하는 아이디입니다.");
+        }
+
+        User user = new User();
+        user.setUserId(userId);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setUsername(username);
         return userRepository.save(user);
     }
 
