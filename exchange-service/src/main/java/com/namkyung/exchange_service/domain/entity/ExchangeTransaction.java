@@ -1,5 +1,6 @@
-package com.namkyung.exchange_service.domain;
+package com.namkyung.exchange_service.domain.entity;
 
+import com.namkyung.exchange_service.domain.TransactionType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
