@@ -1,9 +1,5 @@
 package com.namkyung.exchange_service.service;
 
-import static com.namkyung.exchange_service.domain.TransactionType.EXCHANGE;
-import static org.assertj.core.api.Assertions.*;
-
-import com.namkyung.exchange_service.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
