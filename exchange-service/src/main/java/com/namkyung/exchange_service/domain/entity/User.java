@@ -1,4 +1,4 @@
-package com.namkyung.exchange_service.domain;
+package com.namkyung.exchange_service.domain.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
