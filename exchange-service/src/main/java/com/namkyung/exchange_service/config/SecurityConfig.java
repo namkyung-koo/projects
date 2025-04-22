@@ -20,11 +20,11 @@ public class SecurityConfig {
                         .requestMatchers("/", "/signup", "login", "/css/**", "/exchange-rate", "/main").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/main", true)
-                        .permitAll()
-                )
+//                .formLogin(form -> form
+//                        .loginPage("/login")
+//                        .defaultSuccessUrl("/main", true)
+//                        .permitAll()
+//                )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
                         .permitAll()
