@@ -44,6 +44,7 @@ public class AuthController {
             User user = authService.login(userId, password);
             session.setAttribute("loginUser", user);
             model.addAttribute("username", user.getUsername());
+            model.addAttribute("wallet", user.getWallet());
             return "main";
         } catch (AbsentUserIdException | WrongPasswordException e) {
             log.warn("로그인 실패: {}", e.getMessage());
@@ -80,5 +81,17 @@ public class AuthController {
     public String logout(HttpSession session) {
         session.invalidate(); // 로그인 정보 제거
         return "redirect:/";
+    }
+
+    @GetMapping("/main")
+    public String showMainPage(HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("loginUser");
+        if (loginUser == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("username", loginUser.getUsername());
+        model.addAttribute("wallet", loginUser.getWallet());
+        return "main";
     }
 }

@@ -1,88 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Main</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f4f6f9;
-      font-family: 'Inter', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Inter', sans-serif;
+        }
 
-    .main-container {
-      max-width: 450px;
-      margin: 100px auto;
-      text-align: center;
-      background-color: #ffffff;
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-    }
+        .main-container {
+            max-width: 450px;
+            margin: 100px auto;
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        }
 
-    h2 {
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
+        h2 {
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
 
-    .btn-group-vertical {
-      width: 100%;
-      margin-top: 30px;
-    }
+        .btn-group-vertical {
+            width: 100%;
+            margin-top: 30px;
+        }
 
-    .btn-custom {
-      height: 60px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      transition: all 0.3s ease;
-    }
+        .btn-custom {
+            height: 60px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
 
-    .btn-custom:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
 
-    .top-buttons {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-    }
+        .top-buttons {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
 
-    .btn-sm-custom {
-      margin-left: 6px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-    }
+        .btn-sm-custom {
+            margin-left: 6px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
 
-    .btn-transfer {
-      background-color: #2d6cdf;
-      color: white;
-    }
+        .btn-transfer {
+            background-color: #2d6cdf;
+            color: white;
+        }
 
-    .btn-easy-pin {
-      background-color: #6c757d;
-      color: white;
-    }
-  </style>
+        .btn-easy-pin {
+            background-color: #6c757d;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <div class="top-buttons">
-  <button class="btn btn-outline-secondary btn-sm btn-sm-custom">개인정보수정</button>
-  <button class="btn btn-outline-danger btn-sm btn-sm-custom">로그아웃</button>
+    <a href="/logout" button class="btn btn-outline-danger btn-sm btn-sm-custom">로그아웃</a>
 </div>
 
 <div class="main-container">
-  <h2>안녕하세요 <span th:text="${username}"></span>님!</h2>
+    <h2>안녕하세요 <span th:text="${username}"></span>님!</h2>
 
-  <div class="btn-group-vertical">
-    <button class="btn btn-custom btn-transfer">이체</button>
-    <button class="btn btn-custom btn-transfer">출금</button>
-    <button class="btn btn-custom btn-transfer">환전</button>
-    <button class="btn btn-custom btn-easy-pin">간편 비밀번호 설정</button>
-  </div>
+    <!-- 지갑 잔고 표시 -->
+    <div class="text-start mb-4" style="font-size: 1.05rem; font-weight: 500;">
+        <p>💰 <strong>나의 지갑</strong></p>
+        <p>🇰🇷 <span th:text="${wallet.krw}">0</span> KRW</p>
+        <p th:if="${wallet.jpy > 0}">🇯🇵 <span th:text="${wallet.jpy}">0</span> JPY</p>
+        <p th:if="${wallet.usd > 0}">🇺🇸 <span th:text="${wallet.usd}">0</span> USD</p>
+        <p th:if="${wallet.eur > 0}">🇪🇺 <span th:text="${wallet.eur}">0</span> EUR</p>
+        <p th:if="${wallet.gbp > 0}">🇬🇧 <span th:text="${wallet.gbp}">0</span> GBP</p>
+    </div>
+
+    <div class="btn-group-vertical">
+        <button class="btn btn-custom btn-transfer">충전</button>
+        <button class="btn btn-custom btn-transfer">송금</button>
+        <button class="btn btn-custom btn-transfer">환전</button>
+        <button class="btn btn-custom btn-easy-pin">간편 비밀번호 설정</button>
+    </div>
 </div>
 </body>
 </html>
