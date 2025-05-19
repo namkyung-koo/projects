@@ -1,27 +1,28 @@
 package com.namkyung.exchange_service.domain.entity;
 
-import com.namkyung.exchange_service.domain.CurrencyType;
+import com.namkyung.exchange_service.domain.TransactionType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class ExchangeRate {
+public class Transaction {
 
     @Id @GeneratedValue
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private CurrencyType fromCurrency; // 예시. KRW
+    @ManyToOne
+    private Wallet wallet;
 
     @Enumerated(EnumType.STRING)
-    private CurrencyType toCurrency; // 예시. USD
+    private TransactionType type; // DEPOSIT, TRANSFER, EXCHANGE
 
-    private BigDecimal rate;
+    private BigDecimal amount;
 
-    private LocalDateTime fetchedAt;
+    private LocalDateTime createdAt;
 }

@@ -6,22 +6,24 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
-public class ExchangeRate {
+public class ExchangeHistory {
 
     @Id @GeneratedValue
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private CurrencyType fromCurrency; // 예시. KRW
+    @OneToOne
+    private Transaction transaction;
+
+    private BigDecimal sourceAmount;
+    private BigDecimal targetAmount;
 
     @Enumerated(EnumType.STRING)
-    private CurrencyType toCurrency; // 예시. USD
+    private CurrencyType fromCurrency;
 
-    private BigDecimal rate;
-
-    private LocalDateTime fetchedAt;
+    @Enumerated(EnumType.STRING)
+    private CurrencyType toCurrency;
 }

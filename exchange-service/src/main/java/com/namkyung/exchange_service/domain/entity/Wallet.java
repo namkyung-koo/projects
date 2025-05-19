@@ -1,35 +1,26 @@
 package com.namkyung.exchange_service.domain.entity;
 
-import jakarta.persistence.Embeddable;
-import lombok.Getter;
-import lombok.Setter;
+import com.namkyung.exchange_service.domain.CurrencyType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import java.math.BigDecimal;
 
-@Embeddable
-@Getter @Setter
+@Entity
 public class Wallet {
 
-    private Long krw;
-    private Long jpy;
-    private Long usd;
-    private Long eur;
-    private Long gbp;
+    @Id @GeneratedValue
+    private Long id;
 
-    public Wallet() {
-        this.krw = 0L;
-        this.jpy = 0L;
-        this.usd = 0L;
-        this.eur = 0L;
-        this.gbp = 0L;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
-    public void deposit(Long amount) {
-        this.krw += amount;
-    }
+    @Enumerated(EnumType.STRING)
+    private CurrencyType currency; // 예시. KRW, USD, JPY, EUR, GBP, CNY
 
-    public void withdraw(Long amount) {
-        if (this.krw < amount) {
-            throw new IllegalArgumentException("잔액이 부족합니다.");
-        }
-        this.krw -= amount;
-    }
+    private BigDecimal balance;
 }
